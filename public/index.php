@@ -7,12 +7,15 @@ use App\Controllers\BlogController;
 $controller = new BlogController;
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$method = $_SERVER["REQUEST_METHOD"];
 
 // Basic Routing
-if ($uri == '/' && $_SERVER["REQUEST_METHOD"] == 'GET') {
+if ($uri == '/' && $method == 'GET') {
     $controller->index();
-} elseif ($uri == '/create' && ['REQUEST_METHOD' == 'GET']) {
+} elseif ($uri == '/create' && $method == 'GET') {
     $controller->create();
+} elseif ($uri == '/create' && $method == 'POST') {    
+    $controller->store();
 }
 
 
