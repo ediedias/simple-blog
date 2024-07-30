@@ -13,23 +13,24 @@ class BlogController
     public function __construct()
     {
         $this->repository = new BlogRepository;
-        $this->template = new class extends BlogTemplate {
-            protected function content($data)
-            {
-                include '../src/Views/blog_content.php';
-            }
-        };
+        $this->template = new BlogTemplate;
     }
 
     public function index() 
     {        
         $posts = $this->repository->getAllPosts();        
-        $this->template->render($posts);               
+        $this->template->render('../src/Views/index.php', $posts);               
     }
 
     public function create()
     {
-        $this->template->render("../src/Views/create.php");        
+        $this->template->render('../src/Views/create.php');
+    }
+
+    public function show($id)
+    {
+        $post = $this->repository->getPostById($id);
+        $this->template->render('../src/Views/show.php', $post);
     }
 
     public function store()

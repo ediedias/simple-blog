@@ -2,12 +2,12 @@
 
 namespace App\Templates;
 
-abstract class BlogTemplate
+class BlogTemplate
 {
-     public function render($data)
+     public function render($content, $data = null)
      {        
           $this->header();
-          $this->content($data);
+          $this->content($content, $data);
           $this->footer();          
           
      }
@@ -22,5 +22,8 @@ abstract class BlogTemplate
           include '../src/Views/footer.php';
      }
 
-     protected abstract function content($data);
+     protected function content($content, $data) {
+          $data = $data;          
+          include $content;
+     }
 }

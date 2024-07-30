@@ -16,6 +16,8 @@ if ($uri == '/' && $method == 'GET') {
     $controller->create();
 } elseif ($uri == '/create' && $method == 'POST') {    
     $controller->store();
+} elseif (preg_match('/\/post\/(\d+)/', $uri, $matches)) {
+    $controller->show($matches[1]);
 }
 
 

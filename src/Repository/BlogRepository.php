@@ -30,6 +30,18 @@ class BlogRepository
           $stmt->execute();
      }
 
+     public function getPostById($id)
+     {
+          $stmt = $this->db->prepare("SELECT * FROM posts WHERE id = :id");
+          $stmt->bindParam(':id', $id);
+          $stmt->execute();
+          $post = $stmt->fetch(PDO::FETCH_ASSOC);
+          if ($post) {
+               return new BlogPost($post['id'], $post['title'], $post['body'], $post['created_at']);
+          }
+          return null;
+     }
+
      public function getAllPosts()
      {
           $stmt = $this->db->query("SELECT * FROM posts ORDER BY created_at DESC");

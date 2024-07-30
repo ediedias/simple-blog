@@ -17,6 +17,10 @@ class BlogPost
           $this->createdAt = $createdAt;
      }
 
+     public function getId() {
+          return $this->id;
+     }
+
      public function __get($param) {
           return $this->$param;
      }
